@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useAppSelector } from './components/hooks'
+import Casino from './components/Casino'
+import Ingame from './components/Ingame'
+import LoginForm from './components/LoginForm'
+import logo from './images/logo.svg'
 
 function App() {
+  const { user } = useAppSelector((state) => state.user)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className='ui one column center aligned page grid'>
+        <div className='column twelve wide'>
+          <img src={logo} alt='logo' />
+        </div>
+      </div>
+      <div className='main container'>
+        {!user ? (
+          <LoginForm />
+        ) : (
+          <>
+            <Casino user={user} />
+            <Ingame />
+          </>
+        )}
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
