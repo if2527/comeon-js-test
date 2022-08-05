@@ -19,7 +19,7 @@ function App() {
           <LoginForm />
         ) : (
           <>
-            <Casino user={user} />
+            <Casino />
             <Ingame />
           </>
         )}

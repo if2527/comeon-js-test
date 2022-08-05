@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { IGame, IUser } from '../interfaces'
+import { IGame } from '../interfaces'
 import { fetchCategories } from '../store/categorySlice'
 import { fetchGames } from '../store/gamesSlice'
 import { logout } from '../store/userSlice'
@@ -8,8 +8,9 @@ import GameItem from './GameItem'
 import { useAppDispatch, useAppSelector } from './hooks'
 import Player from './Player'
 
-const Casino = ({ user }: { user: IUser }) => {
+const Casino = () => {
   const dispatch = useAppDispatch()
+  const { user } = useAppSelector((state) => state.user)
   const { categories } = useAppSelector((state) => state.categories)
   const { games } = useAppSelector((state) => state.games)
   const [currentCategory, setCurrentCategory] = useState(0)
@@ -25,7 +26,7 @@ const Casino = ({ user }: { user: IUser }) => {
       <div className='ui grid stackable'>
         <div className='twelve wide column'>
           <div className='ui list'>
-            <Player user={user} />
+            {user && <Player user={user} />}
           </div>
           <button
             className='logout ui left floated secondary button'
